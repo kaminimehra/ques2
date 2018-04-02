@@ -20,4 +20,30 @@ main()
 		complete[s]=0;//setting completion time of process to 0 to act as reffernece.
 		priority[s]=0;//setting initial priority of all process to 0
 	}
+	int k,p,q;
+	while(1)
+	{
+		for(k=0;k<n;k++)
+		{
+			if(timer>=arrival[k] && updated_burst_time[k]!=(-1)) 
+			{
+				//calculation of priority.
+				priority[k]=1+((timer-arrival[k])/updated_burst_time[k]);
+			}
+		}
+		for(p=0;p<n;p++)
+		{
+			for(q=0;q<n-1-p;q++)
+			{
+				if(priority[q]<priority[q+1] && process_arrived[q]!=0 && process_arrived[q+1]!=0)
+				{
+					//swapping priority
+					priority[q]=priority[q]+priority[q+1];
+					priority[q+1]=priority[q]-priority[q+1];
+					priority[q]=priority[q]-priority[q+1];
+					//swapping process arrived(wdout using third variable)
+					process_arrived[q]=process_arrived[q]+process_arrived[q+1];
+					process_arrived[q+1]=process_arrived[q]-process_arrived[q+1];
+					process_arrived[q]=process_arrived[q]-process_arrived[q+1];
+				}
 
