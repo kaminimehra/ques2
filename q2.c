@@ -74,4 +74,23 @@ main()
 			}
 			bt=bt-1;
 			timer=timer+1;
-
+	if(bt==0)
+			{
+				printf("process %d completed\n",y );
+				complete[y-1]=timer;
+				i=i+1;
+				updated_burst_time[y-1]=-1;
+				for(x=0;x<n;x++)
+				{
+					priority[x]=0;
+					if(process_arrived[x]!=0)
+					{
+						process_arrived[x]=x+1;
+					}
+				}
+				break;
+			}
+		}while(1);
+		if(i==n)
+		break;
+	}
