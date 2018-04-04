@@ -46,4 +46,32 @@ main()
 					process_arrived[q+1]=process_arrived[q]-process_arrived[q+1];
 					process_arrived[q]=process_arrived[q]-process_arrived[q+1];
 				}
+				else if(priority[q]==priority[q+1]  && process_arrived[q]!=0 && process_arrived[q+1]!=0)
+				{
+					
+					if(updated_burst_time[q]<updated_burst_time[q+1])
+					{	
+						//if priority are same swapping on the basis of burst time
+						process_arrived[q]=process_arrived[q]+process_arrived[q+1];
+						process_arrived[q+1]=process_arrived[q]-process_arrived[q+1];
+						process_arrived[q]=process_arrived[q]-process_arrived[q+1];
+					}
+				}
+			}
+		}
+		//after swappping selecting the process we want to execute.
+		y=process_arrived[0];
+		bt=updated_burst_time[y-1];
+		do
+		{
+			for(x=0;x<n;x++)
+			{
+				if(timer==arrival[x])
+				{		
+					process_arrived[x]=x+1;
+					printf("process %d arrived\n",x);
+				}	
+			}
+			bt=bt-1;
+			timer=timer+1;
 
