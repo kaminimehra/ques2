@@ -74,7 +74,7 @@ main()
 			}
 			bt=bt-1;
 			timer=timer+1;
-	if(bt==0)
+			if(bt==0)
 			{
 				printf("process %d completed\n",y );
 				complete[y-1]=timer;
@@ -94,3 +94,20 @@ main()
 		if(i==n)
 		break;
 	}
+	//calculation of tat,wt and avg. tat and avg. wt.
+	int average_turn_around=0,average_waiting=0;
+	for(i=0;i<n;i++)
+	{
+		turnaround_time[i]=complete[i]-arrival[i];
+		average_turn_around+=turnaround_time[i];
+		waiting_time[i]=turnaround_time[i]-burst_time[i];
+		average_waiting+=waiting_time[i];
+	}
+	printf("Process Id\tArrival Time\tBurst Time\tTurnaround Time\tWaiting Time\n");
+	for(i=0;i<n;i++)
+	{
+		printf("%2d\t\t%2d\t\t%2d\t\t%2d\n",arrival[i],burst_time[i],turnaround_time[i],waiting_time[i]);
+	}
+	printf("average waiting time is %2f",(average_waiting*1.0)/(n*1.0));
+	printf("average turnaround time is %2f",(average_turn_around*1.0)/(n*1.0));
+}
